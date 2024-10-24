@@ -1,48 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 .header {
-  height: 12vh;
-  background: #000000; /* Black background */
-  color: #fff; /* White text */
-  padding: 15px 0; /* Adjusted padding to control vertical spacing */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  font-family: 'Inter', sans-serif;
-  position: fixed; /* Fix the header to the top */
+  height: 80px;
+  background: rgb(7, 7, 8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(243, 243, 243, 0);
+  position: fixed;
   top: 0;
   
-  width: 100%; /* Ensure it spans the full width */
-  z-index: 1000; /* Ensure it stays on top of other elements */
-  overflow: hidden; /* To clip the glowing effect */
+  width: 101%;
+  z-index: 1000;
 }
 
 .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1450px;
+  max-width: 1500px;
+  height: 100%;
   margin: 0 auto;
-  padding: 0px 0px; /* Add padding only to the left and right */
-  width: 100%; /* Ensure the container spans the entire width */
-  flex-wrap: wrap; /* Ensure it wraps on smaller screens */
+  padding: 0 2rem;
 }
 
 .title {
-  
-  font-size: 2.3rem;
-  font-weight: bold;
-  text-align: left;
-  text-transform: capitalize;
-  color: white;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #ffffff;
   text-decoration: none;
-  margin-left: 0; /* No extra margin */
-  flex: 1; /* Ensure it stays aligned to the left */
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-style: normal;
+  letter-spacing: 0.5px;
+  /* text-transform: uppercase; */
 }
 
 .title:hover {
-  color: #ffeb3b; /* Change color on hover */
+  opacity: 0.9;
 }
 
 .nav {
@@ -53,95 +41,112 @@
 .navLinks {
   list-style: none;
   display: flex;
-  margin-right: 20px;
-}
-
-.navLinks li {
-  margin: 0 20px; /* Equal padding between nav items */
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
 }
 
 .link {
-  color: white;
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s;
-  font-family: 'Inter', sans-serif; /* Ensure links use the same font */
+  transition: all 0.2s;
+  font-size: 0.9375rem;
+  letter-spacing: 0.3px;
 }
 
 .link:hover {
-  color: #ffeb3b; /* Highlight color on hover */
+  color: #ffffff;
+}
+
+.walletActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .ctaBtn {
-  background-color: #ff3f20; /* Button color */
-  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.3s ease;
   border: none;
-  border-radius: 12px;
-  padding: 15px 30px; /* Increased button size */
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  letter-spacing: 0.3px;
 }
 
-.ctaBtn:hover {
-  color: #fcfcfc;
-  background-color: #cd0505; /* Darker shade on hover */
-  transform: translateY(-2px);
-}
-
-.ctaBtn:active {
-  transform: translateY(1px);
+.metamaskIcon {
+  width: 18px;
+  height: 18px;
 }
 
 .activebtn {
-  background-color: #4caf50; /* Green when connected */
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.activebtn:hover {
+  background: rgb(63, 170, 68);
 }
 
 .inactivebtn {
-  color: black;
-  background-color: #fcfcfc; /* Red when not connected */
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.main-section {
+.inactivebtn:hover {
+  background: #f0f0f0;
+  transform: translateY(-1px);
+}
+
+.disconnectBtn {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 50px 20px;
-  flex-wrap: wrap; /* Ensure wrapping on smaller screens */
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+  letter-spacing: 0.3px;
 }
 
-.main-section img {
-  max-width: 400px; /* Adjust to ensure images aren't too big */
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
+.disconnectBtn:hover {
+  background: rgb(210, 81, 81);
 }
 
-.hero-content {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  gap: 40px; /* Added space between content */
-}
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
 
-.hero-text {
-  max-width: 600px;
-  text-align: left;
-}
+  .title {
+    font-size: 1.5rem;
+  }
 
-.hero-text h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
+  .navLinks {
+    gap: 1rem;
+  }
 
-.hero-buttons {
-  display: flex;
-  gap: 20px; /* Spacing between buttons */
-}
+  .link {
+    font-size: 0.875rem;
+  }
 
-/* NEW CLASS TO PUSH MAIN CONTENT DOWN */
-.main-content {
-  margin-top: 100px; /* Adjust this value based on the height of your header */
+  .ctaBtn span, 
+  .disconnectBtn span {
+    display: none;
+  }
+
+  .ctaBtn, 
+  .disconnectBtn {
+    padding: 0.75rem;
+  }
 }

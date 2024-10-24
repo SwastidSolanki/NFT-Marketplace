@@ -3,6 +3,8 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  margin-bottom: 10px;
+  filter: grayscale();
   overflow: hidden; /* Prevents overflow from video */
 }
 

@@ -3,12 +3,8 @@ import { WalletContext } from "@/context/wallet";
 import { BrowserProvider } from "ethers";
 import Link from "next/link";
 import { useContext } from "react";
-
-import { Inter } from 'next/font/google';
+import { Wallet, LogOut } from 'lucide-react';
 import styles from "./Header.module.css";
-
-// Import the Inter font
-const inter = Inter({ subsets: ['latin'] });
 
 export default function Header() {
   const {
@@ -45,12 +41,17 @@ export default function Header() {
     }
   };
 
+  const disconnectWallet = () => {
+    setIsConnected(false);
+    setUserAddress("");
+    setSigner(null);
+  };
+
   return (
     <header className={styles.header}>
-      <div className={`${styles.container} ${inter.className}`}>
-        {/* Align NFT Marketplace to the left */}
+      <div className={styles.container}>
         <Link href="/" className={styles.title}>
-          NFT Marketplace
+        Picasso Palette
         </Link>
         <nav className={styles.nav}>
           <ul className={styles.navLinks}>
@@ -71,16 +72,37 @@ export default function Header() {
             </li>
           </ul>
         </nav>
-        <button
-          className={`${styles.ctaBtn} ${isConnected ? styles.activebtn : styles.inactivebtn}`}
-          onClick={connectWallet}
-        >
-          {isConnected ? (
-            <><h3>Connected</h3></>
-          ) : (
-            "Connect Metamask"
+        <div className={styles.walletActions}>
+          {isConnected && (
+            <button
+              onClick={disconnectWallet}
+              className={styles.disconnectBtn}
+            >
+              <LogOut size={18} />
+              <span>Disconnect</span>
+            </button>
           )}
-        </button>
+          <button
+            className={`${styles.ctaBtn} ${isConnected ? styles.activebtn : styles.inactivebtn}`}
+            onClick={connectWallet}
+          >
+            {isConnected ? (
+              <>
+                <Wallet size={18} />
+                <span>Connected</span>
+              </>
+            ) : (
+              <>
+                <img 
+                  src="/MetaMask.png" 
+                  alt="MetaMask" 
+                  className={styles.metamaskIcon}
+                />
+                <span>Connect Wallet</span>
+              </>
+            )}
+          </button>
+        </div>
       </div>
     </header>
   );
