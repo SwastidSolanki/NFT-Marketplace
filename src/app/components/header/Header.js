@@ -88,8 +88,13 @@ export default function Header() {
           >
             {isConnected ? (
               <>
-                <Wallet size={18} />
+                <img 
+                  src="/MetaMask.png" 
+                  alt="MetaMask" 
+                  className={styles.metamaskIcon}
+                />
                 <span>Connected</span>
+               
               </>
             ) : (
               <>
