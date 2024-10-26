@@ -23,7 +23,16 @@ export default function Header() {
 
   const connectWallet = async () => {
     if (!window.ethereum) {
-      throw new Error("Metamask is not installed");
+      // Detect if the platform is mobile or desktop
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+      if (isMobile) {
+        // Redirect to MetaMask App or App Store if MetaMask is not installed
+        window.location.href = "https://metamask.app.link/dapp/nft-marketplacemp.vercel.app/";
+      } else {
+        alert("MetaMask is not installed. Please install it to connect your wallet.");
+      }
+      return;
     }
 
     try {
@@ -38,11 +47,11 @@ export default function Header() {
       const sepoliaNetworkId = "11155111";
 
       if (chainID.toString() !== sepoliaNetworkId) {
-        alert("Please switch your MetaMask to sepolia network");
+        alert("Please switch your MetaMask to the Sepolia network");
         return;
       }
     } catch (error) {
-      console.error("connection error: ", error);
+      console.error("Connection error: ", error);
     }
   };
 
