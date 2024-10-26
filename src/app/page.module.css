@@ -48,7 +48,7 @@
 
 .cardImage {
   width: 500px; /* Increased width of images */
-  height: auto; /* Maintain aspect ratio */
+  height: 500px; /* Maintain aspect ratio */
 }
 
 

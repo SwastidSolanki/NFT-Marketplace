@@ -24,7 +24,7 @@ export default function HomePage() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
         >
-          <img src="/left.png" alt="NFT Art Left" className={styles.cardImage} />
+          <img src="/leftonee.webp" alt="NFT Art Left" className={styles.cardImage} />
         </motion.div>
 
         <div className={styles.textContainer}>
@@ -36,7 +36,7 @@ export default function HomePage() {
           >
             <h1 className={styles.heading}>
               Where Art Meets Innovation, <br />
-              Step into NFTstore!
+              Step into Picasso Palette!
             </h1>
           </motion.div>
 
@@ -89,7 +89,7 @@ export default function HomePage() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
         >
-          <img src="/right.png" alt="NFT Art Right" className={styles.cardImage} />
+          <img src="/rightone.webp" alt="NFT Art Right" className={styles.cardImage} />
         </motion.div>
       </div>
 

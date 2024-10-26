@@ -1,7 +1,5 @@
-// Mark this component as a Client Component
 "use client";
 
-// Import necessary modules
 import { WalletContext } from "@/context/wallet";
 import { useContext, useEffect, useState } from "react";
 import { ethers } from "ethers";
@@ -11,12 +9,12 @@ import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import axios from "axios";
 import NFTCard from "../components/nftCard/NFTCard";
-import { motion } from "framer-motion"; // Framer Motion import
+import { motion } from "framer-motion";
 
 export default function Marketplace() {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
-  const [filter, setFilter] = useState("all"); // Default filter
+  const [filter, setFilter] = useState("highToLow"); // Set default to "highToLow"
   const { isConnected, signer } = useContext(WalletContext);
 
   async function getNFTitems() {
@@ -63,7 +61,7 @@ export default function Marketplace() {
       try {
         const itemsArray = await getNFTitems();
         setItems(itemsArray);
-        setFilteredItems(filterItems(itemsArray, filter)); // Set filtered items
+        setFilteredItems(filterItems(itemsArray, filter));
       } catch (error) {
         console.error("Error fetching NFT items:", error);
       }
@@ -73,7 +71,7 @@ export default function Marketplace() {
   }, [isConnected]);
 
   useEffect(() => {
-    setFilteredItems(filterItems(items, filter)); // Update filtered items when the filter changes
+    setFilteredItems(filterItems(items, filter));
   }, [filter, items]);
 
   return (
@@ -83,7 +81,7 @@ export default function Marketplace() {
         className={styles.innerContainer}
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }} // Add smooth scroll effect
+        transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className={styles.content}>
           {isConnected ? (
@@ -96,15 +94,14 @@ export default function Marketplace() {
               >
                 <h2 className={styles.heading}>NFTs</h2>
 
-                {/* Filter Dropdown */}
                 <select
                   value={filter}
                   onChange={(e) => setFilter(e.target.value)}
                   className={styles.filterDropdown}
                 >
-                  <option value="all">All</option>
-                  <option value="lowToHigh">Price: Low to High</option>
-                  <option value="highToLow">Price: High to Low</option>
+                
+                  <option value="lowToHigh">Price: Low to High </option>
+                  <option value="highToLow">Price: High to Low </option>
                 </select>
 
                 {Array.isArray(filteredItems) && filteredItems.length > 0 ? (
@@ -123,7 +120,6 @@ export default function Marketplace() {
           )}
         </div>
       </motion.div>
-      {/* <Footer /> */}
     </div>
   );
 }

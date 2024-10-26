@@ -275,3 +275,32 @@
   font-style: italic;
 }
 
+.filterDropdown {
+  
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filterDropdown:hover {
+  background-color: #333;
+  color: #f3f3f3;
+}
+
+.filterDropdown option {
+  color: #1a1a1a;
+  background-color: #ffffff;
+  font-weight: 400;
+}
+
+.filterDropdown:focus {
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  transition: box-shadow 0.3s ease;
+}
