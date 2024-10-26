@@ -5,7 +5,6 @@
   border-bottom: 1px solid rgba(243, 243, 243, 0);
   position: fixed;
   top: 0;
-  
   width: 101%;
   z-index: 1000;
 }
@@ -26,7 +25,6 @@
   color: #ffffff;
   text-decoration: none;
   letter-spacing: 0.5px;
-  /* text-transform: uppercase; */
 }
 
 .title:hover {
@@ -123,6 +121,81 @@
   background: rgb(210, 81, 81);
 }
 
+.mobileMenuBtn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.mobileMenuBtn:hover {
+  transform: scale(1.1);
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  background: rgb(7, 7, 8);
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
+}
+
+.mobileMenu.open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobileNavLinks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobileNavLinks li {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  transition-delay: calc(0.1s * var(--item-index));
+}
+
+.open .mobileNavLinks li {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobileNavLinks li a {
+  display: block;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobileWalletActions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  transition-delay: 0.3s;
+}
+
+.open .mobileWalletActions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 0 1rem;
@@ -132,21 +205,46 @@
     font-size: 1.5rem;
   }
 
-  .navLinks {
-    gap: 1rem;
+  .nav {
+    display: none;
   }
 
-  .link {
-    font-size: 0.875rem;
+  .walletActions {
+    display: none;
+  }
+
+  .mobileMenuBtn {
+    display: block;
   }
 
   .ctaBtn span, 
   .disconnectBtn span {
-    display: none;
+    display: block;
   }
 
   .ctaBtn, 
   .disconnectBtn {
-    padding: 0.75rem;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

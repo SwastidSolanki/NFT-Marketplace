@@ -14,12 +14,13 @@ import { motion } from "framer-motion";
 export default function Marketplace() {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
-  const [filter, setFilter] = useState("highToLow"); // Set default to "highToLow"
+  const [filter, setFilter] = useState("highToLow");
   const { isConnected, signer } = useContext(WalletContext);
 
   async function getNFTitems() {
     const itemsArray = [];
-    if (!signer) return;
+    if (!signer) return itemsArray;
+
     let contract = new ethers.Contract(
       MarketplaceJson.address,
       MarketplaceJson.abi,
@@ -50,7 +51,7 @@ export default function Marketplace() {
   }
 
   const filterItems = (items, filter) => {
-    if (filter === "all") return items;
+    if (!Array.isArray(items) || items.length === 0) return [];
     if (filter === "lowToHigh") return [...items].sort((a, b) => a.price - b.price);
     if (filter === "highToLow") return [...items].sort((a, b) => b.price - a.price);
     return items;
@@ -64,6 +65,7 @@ export default function Marketplace() {
         setFilteredItems(filterItems(itemsArray, filter));
       } catch (error) {
         console.error("Error fetching NFT items:", error);
+        setItems([]);
       }
     };
 
@@ -94,20 +96,28 @@ export default function Marketplace() {
               >
                 <h2 className={styles.heading}>NFTs</h2>
 
-                <select
-                  value={filter}
-                  onChange={(e) => setFilter(e.target.value)}
-                  className={styles.filterDropdown}
-                >
-                
-                  <option value="lowToHigh">Price: Low to High </option>
-                  <option value="highToLow">Price: High to Low </option>
-                </select>
+                <div className={styles.filterContainer}>
+                  <select
+                    value={filter}
+                    onChange={(e) => setFilter(e.target.value)}
+                    className={styles.filterDropdown}
+                  >
+                    <option value="lowToHigh">Price: Low to High</option>
+                    <option value="highToLow">Price: High to Low</option>
+                  </select>
+                </div>
 
                 {Array.isArray(filteredItems) && filteredItems.length > 0 ? (
                   <div className={styles.nftGrid}>
                     {filteredItems.map((value, index) => (
-                      <NFTCard item={value} key={index} />
+                      <motion.div
+                        key={value.tokenId}
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <NFTCard item={value} />
+                      </motion.div>
                     ))}
                   </div>
                 ) : (
@@ -120,6 +130,7 @@ export default function Marketplace() {
           )}
         </div>
       </motion.div>
+      
     </div>
   );
 }

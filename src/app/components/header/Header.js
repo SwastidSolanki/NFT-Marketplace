@@ -1,12 +1,13 @@
 "use client";
+import { useState, useContext } from 'react';
 import { WalletContext } from "@/context/wallet";
 import { BrowserProvider } from "ethers";
 import Link from "next/link";
-import { useContext } from "react";
-import { Wallet, LogOut } from 'lucide-react';
+import { Menu, X, LogOut } from 'lucide-react';
 import styles from "./Header.module.css";
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const {
     isConnected,
     setIsConnected,
@@ -15,6 +16,10 @@ export default function Header() {
     signer,
     setSigner,
   } = useContext(WalletContext);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const connectWallet = async () => {
     if (!window.ethereum) {
@@ -45,14 +50,17 @@ export default function Header() {
     setIsConnected(false);
     setUserAddress("");
     setSigner(null);
+    setIsMenuOpen(false); // Close mobile menu on disconnect
   };
 
   return (
     <header className={styles.header}>
       <div className={styles.container}>
         <Link href="/" className={styles.title}>
-        Picasso Palette
+          Picasso Palette
         </Link>
+
+        {/* Desktop Navigation */}
         <nav className={styles.nav}>
           <ul className={styles.navLinks}>
             <li>
@@ -72,6 +80,8 @@ export default function Header() {
             </li>
           </ul>
         </nav>
+
+        {/* Desktop Wallet Actions */}
         <div className={styles.walletActions}>
           {isConnected && (
             <button
@@ -94,7 +104,83 @@ export default function Header() {
                   className={styles.metamaskIcon}
                 />
                 <span>Connected</span>
-               
+              </>
+            ) : (
+              <>
+                <img 
+                  src="/MetaMask.png" 
+                  alt="MetaMask" 
+                  className={styles.metamaskIcon}
+                />
+                <span>Connect Wallet</span>
+              </>
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button 
+          className={styles.mobileMenuBtn}
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.open : ''}`}>
+        <ul className={styles.mobileNavLinks}>
+          <li style={{"--item-index": 1}}>
+            <Link 
+              href="/marketplace" 
+              className={styles.link} 
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Buy NFT
+            </Link>
+          </li>
+          <li style={{"--item-index": 2}}>
+            <Link 
+              href="/sellNFT" 
+              className={styles.link} 
+              onClick={() => setIsMenuOpen(false)}
+            >
+              List NFT
+            </Link>
+          </li>
+          <li style={{"--item-index": 3}}>
+            <Link 
+              href="/profile" 
+              className={styles.link} 
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Profile
+            </Link>
+          </li>
+        </ul>
+        <div className={styles.mobileWalletActions}>
+          {isConnected && (
+            <button
+              onClick={disconnectWallet}
+              className={styles.disconnectBtn}
+            >
+              <LogOut size={18} />
+              <span>Disconnect</span>
+            </button>
+          )}
+          <button
+            className={`${styles.ctaBtn} ${isConnected ? styles.activebtn : styles.inactivebtn}`}
+            onClick={connectWallet}
+          >
+            {isConnected ? (
+              <>
+                <img 
+                  src="/MetaMask.png" 
+                  alt="MetaMask" 
+                  className={styles.metamaskIcon}
+                />
+                <span>Connected</span>
               </>
             ) : (
               <>

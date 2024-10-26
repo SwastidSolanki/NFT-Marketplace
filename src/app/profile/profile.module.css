@@ -199,22 +199,44 @@
   .innerContainer {
     padding: 1rem;
   }
-  
+
   .content {
     padding: 1.5rem;
   }
-  
+
   .profileHeader {
     flex-direction: column;
     text-align: center;
+    gap: 1rem;
   }
-  
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .avatarContainer {
+    width: 56px;
+    height: 56px;
+  }
+
   .addressContainer {
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+
   .statsContainer {
     grid-template-columns: 1fr;
+  }
+
+  .nftGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .statValue {
+    font-size: 1.2rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.3rem;
   }
 }
